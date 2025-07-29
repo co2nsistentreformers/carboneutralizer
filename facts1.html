@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CO₂ Fun Facts</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2fff6;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background-color: #d4f7df;
+      padding: 15px 30px;
+      color: #1c4532;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-left span {
+      margin-left: 10px;
+    }
+
+    .nav-right a {
+      color: #22543d;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    .nav-right a:hover {
+      text-decoration: underline;
+    }
+
+    .fact-box {
+      max-width: 600px;
+      margin: 60px auto;
+      background-color: #e6fff0;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .fact-box h2 {
+      font-size: 24px;
+      color: #1c4532;
+      margin-bottom: 20px;
+    }
+
+    .fact {
+      font-size: 18px;
+      color: #2f4858;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      background-color: #2f855a;
+      color: white;
+      padding: 10px 20px;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #276749;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Tab -->
+  <nav>
+    <div class="nav-left">
+      🌱 <span>CO₂ Facts</span>
+    </div>
+    <div class="nav-right">
+      <a href="#">Home</a>
+      <a href="#">Facts</a>
+      <a href="#">About</a>
+    </div>
+  </nav>
+
+  <!-- Fun Fact Box -->
+  <div class="fact-box">
+    <h2>💡 Did You Know?</h2>
+    <div class="fact" id="factText">Loading...</div>
+    <button class="btn" onclick="showNextFact()">Show Another Fact</button>
+  </div>
+
+  <script>
+    const facts = [
+      "🌳 One tree absorbs ~22kg CO₂ per year.",
+      "🚗 Driving 1 km emits ~0.2 kg CO₂ in a petrol car.",
+      "💡 Vampire devices can emit 30 kg CO₂ yearly per home.",
+      "📱 Streaming 1 hour of HD video = ~0.2 kg CO₂.",
+      "✈️ One round-trip flight from NY to London = 986 kg CO₂.",
+      "🍔 Producing one beef burger = ~3 kg CO₂.",
+      "❌ Leaving your computer on overnight wastes ~1.5 kg CO₂/month.",
+      "🌍 CO₂ levels are higher now than at any point in the last 800,000 years.",
+      "🔥 Every second, the world emits ~1,000 tonnes of CO₂.",
+      "🧺 1 plastic bottle = ~100g CO₂ to produce.",
+      "⚡ LED bulbs use 80% less energy than incandescents.",
+      "🧼 One cotton shirt = 2.1 kg CO₂.",
+      "🚧 Cement industry = ~8% of global CO₂ emissions.",
+      "🌞 Solar energy produces 20x less CO₂ than coal.",
+      "🌿 Bamboo grows fast and captures more CO₂ than regular trees.",
+      "🛫 One cruise ship emits as much CO₂ as 12,000 cars.",
+      "🍽 Food waste causes ~10% of total global emissions.",
+      "🏠 Heating and cooling = 50% of a home's energy use.",
+      "🏜️ Tourism contributes ~8% to global CO₂ emissions.",
+      "⛅ Weather extremes are intensified by rising CO₂ levels.",
+      "🤔 Just one hour of video conferencing = ~0.15 kg CO₂.",
+      "🚉 Trains emit 80% less CO₂ than planes per km traveled.",
+      "♻️ Recycling aluminum saves 95% of CO₂ vs new production.",
+      "🛋 Using fans instead of AC reduces CO₂ by up to 90%.",
+      "🚗 Carpooling can cut your transport CO₂ by half.",
+      "🍽 A vegetarian diet can lower emissions by 1,500 kg/year.",
+      "🚛 Trucks cause ~20% of global transport emissions.",
+      "🌅 Every sunrise brings ~100 million tonnes of fresh CO₂.",
+      "⛽ Fossil fuels are responsible for ~75% of all emissions.",
+      "🧻 A 5-minute shower = ~0.4 kg CO₂ if heated with electricity.",
+      "🚧 Steel production emits 2.6 billion tonnes of CO₂ per year.",
+      "🌎 If CO₂ were visible, we'd live in a grey fog.",
+      "🛋 Turning off your Wi-Fi at night saves 30 kg CO₂ yearly.",
+      "🌮 Cooking with gas emits less CO₂ than electric stoves (depending on grid).",
+      "🌟 The cleanest kilowatt-hour is the one you never use.",
+      "🚗 EVs reduce emissions by 40-70% over their lifetime.",
+      "📆 2023 had record-high CO₂ levels — 421 ppm.",
+      "🚒 Air freight emits ~50x more CO₂ per ton than sea shipping.",
+      "🌳 Forests absorb ~2.6 billion tonnes of CO₂ annually.",
+      "🌜 Nighttime lights from cities = huge energy use = high CO₂.",
+      "📢 Awareness is the first step to cutting emissions.",
+      "❄️ Melting Arctic = more dark ocean = more CO₂ absorption loss.",
+      "🌿 Rewilding land boosts natural carbon capture.",
+      "⚡ Smart plugs can cut vampire CO₂ emissions.",
+      "🫳 Using a bicycle is 30x more efficient than a car.",
+      "🌈 Renewable energy jobs are growing 3x faster than fossil ones.",
+      "💸 Energy-efficient buildings save money and emissions.",
+      "🏡 Green roofs help reduce urban CO₂ heat effects.",
+      "🚐 Public transport cuts emissions and traffic.",
+      "🧳 Digital carbon footprints are rising rapidly.",
+      "🔁 Reusing items prevents new CO₂ emissions.",
+      "🌞 Solar panels offset their CO₂ cost in ~1-2 years.",
+      "📱 Charging phones overnight wastes ~0.5 kg CO₂/year.",
+      "✅ Sharing is a form of climate action!"
+    ];
+
+    let currentFactIndex = 0;
+
+    function showNextFact() {
+      currentFactIndex = (currentFactIndex + 1) % facts.length;
+      document.getElementById('factText').innerText = facts[currentFactIndex];
+    }
+
+    // Initialize
+    window.onload = () => {
+      currentFactIndex = Math.floor(Math.random() * facts.length);
+      document.getElementById('factText').innerText = facts[currentFactIndex];
+    };
+  </script>
+
+</body>
+</html>
+

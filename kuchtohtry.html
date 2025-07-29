@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CarboNeutralizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Orbitron:wght@600&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg-light: linear-gradient(to bottom right, #e8f5e9, #ffffff);
+            --text-light: #2e7d32;
+            --heading-light: #1b5e20;
+            --subheading-light: #388e3c;
+            --nav-bg-light: #388e3c;
+            --quote-light: #388e3c;
+
+            --bg-dark: #121917;
+            --text-dark: #c8e6c9;
+            --heading-dark: #a5d6a7;
+            --subheading-dark: #81c784;
+            --nav-bg-dark: #263238;
+            --quote-dark: #81c784;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-light);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        header {
+            background-color: var(--nav-bg-light);
+            color: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode header {
+            background-color: var(--nav-bg-dark);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .brand span {
+            font-size: 1.6em;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .nav-links a {
+            color: #c8e6c9;
+        }
+
+        .nav-links img {
+            width: 22px;
+            margin-right: 6px;
+            transition: transform 0.3s;
+        }
+
+        .nav-links a:hover img {
+            transform: scale(1.2);
+        }
+
+        .toggle-btn {
+            margin-left: 20px;
+            cursor: pointer;
+            background: white;
+            color: #333;
+            border: none;
+            border-radius: 15px;
+            padding: 5px 12px;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background: #f1f1f1;
+        }
+
+        body.dark-mode .toggle-btn {
+            background: #81c784;
+            color: #1b5e20;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            color: var(--heading-light);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .main-title {
+            color: var(--heading-dark);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: var(--subheading-light);
+            margin-bottom: 25px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .subtitle {
+            color: var(--subheading-dark);
+        }
+
+        .hero-image {
+            width: 200px;
+            border-radius: 15px;
+            margin-top: 15px;
+            box-shadow: 0 0 20px rgba(0, 128, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        body.dark-mode .hero-image {
+            box-shadow: 0 0 20px rgba(129, 199, 132, 0.4);
+        }
+
+        .typing {
+            font-family: monospace;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid;
+            width: 0;
+            animation: typing 4s steps(40, end) forwards;
+            margin: 30px auto;
+            color: #33691e;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .typing {
+            color: #a5d6a7;
+        }
+
+        h2.tagline {
+            font-size: 1.8em;
+            margin-top: 20px;
+            color: var(--heading-light);
+            font-weight: 600;
+            animation: fadeIn 2s ease-in-out;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode h2.tagline {
+            color: var(--heading-dark);
+        }
+
+        p {
+            font-size: 1.3em;
+            margin: 30px auto;
+            max-width: 800px;
+            line-height: 1.8;
+            color: var(--text-light);
+            animation: fadeIn 2s ease-in-out;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode p {
+            color: var(--text-dark);
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.15em;
+            color: var(--quote-light);
+            margin-top: 15px;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .quote {
+            color: var(--quote-dark);
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.2em;
+            }
+
+            .nav-links a {
+                font-size: 0.9em;
+            }
+
+            .hero-image {
+                width: 95%;
+            }
+
+            p {
+                font-size: 1.1em;
+                padding: 0 10px;
+            }
+
+            .main-title {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        nav {
+            background-color: #2e7d32;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 3rem;
+            color: #2e7d32;
+        }
+
+        h3 {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+
+        form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label,
+        select {
+            display: block;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        .calculate-btn {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .calculate-btn:hover {
+            background-color: #1b5e20;
+        }
+
+        #result {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .avatar-container {
+            text-align: center;
+            margin: 2rem auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #4caf50;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .avatar-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            color: #2e7d32;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="brand">
+            <span>CarboNeutralizer</span>
+        </div>
+        <div class="nav-links">
+            <a href="https://www.instagram.com/co2nsistent_reformerss/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+                Instagram
+            </a>
+            <a href="https://www.youtube.com/@co2nsistent_reformers" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
+                YouTube
+            </a>
+            <a href="#carbonForm">Carvyn</a>
+             <a href="#aboutUs">About us</a>
+              <a href="#awareness">Awareness</a>
+              <a href="#facts">Facts</a>
+              <a href="campaigns">campaign</a>
+            
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <h1 class="main-title">Welcome to CarboNeutralizer!</h1>
+        <h4 class="subtitle">by CO<sub>2</sub>nsistent Reformers</h4>
+        <img width="200" src="WhatsApp Image 2025-06-14 at 11.06.20_ccfafb44.jpg" alt="Logo" />
+        <!-- Replace 'logo.png' with your logo file path -->
+
+        <div class="typing" id="typing-text"></div>
+
+        <h2 class="tagline">“Visualise Today. Neutralise Tomorrow.”</h2>
+
+        <p>🚗💡🛒🍔
+            When we drive cars, switch on lights, shop online, or enjoy our burgers...
+            Each of these leaves behind an invisible smoke — a side-effect we don’t see, but it silently enters the air.
+            You may not notice it, but it definitely heats up the Earth. 🌍🔥
+            <br /><br />
+            The total pollution we send into the atmosphere — directly or indirectly —
+            is what we call our <strong>carbon footprint</strong>. 👣💨
+        </p>
+
+        <div class="quote">"Small habits have a big impact — and your carbon footprint is the <u>scorecard of that
+                impact</u>!" ✅🌱
+                
+        </div>
+    </div>
+
+    <script>
+        const typingText = document.getElementById("typing-text");
+        const quote = '"We once left footprints on the soil...Now, we leave them in the sky.🌍💨👣"';
+        let index = 0;
+
+        function typeWriter() {
+            if (index < quote.length) {
+                typingText.innerHTML += quote.charAt(index);
+                index++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+
+        window.onload = typeWriter;
+
+
+        // Dark Mode Toggle logic
+        const toggleBtn = document.getElementById('darkToggleBtn');
+
+        function setDarkMode(enabled) {
+            if (enabled) {
+                document.body.classList.add('dark-mode');
+                toggleBtn.textContent = '☀ Light';
+            } else {
+                document.body.classList.remove('dark-mode');
+                toggleBtn.textContent = '🌗 Dark';
+            }
+            localStorage.setItem('darkMode', enabled ? 'enabled' : 'disabled');
+        }
+    </script>
+    <style>
+        /* Basic Reset & Fonts */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #222;
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Container & form layout */
+        form#carbonForm {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            background: white;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+        }
+
+        /* Form elements */
+        label,
+        legend {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        select,
+        input[type="checkbox"] {
+            margin-bottom: 18px;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px 12px;
+            font-size: 1rem;
+            border: 1.8px solid #bbb;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        fieldset {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 15px 20px 20px 20px;
+            border-radius: 7px;
+            background: #fafafa;
+        }
+
+        fieldset legend {
+            font-weight: 700;
+            color: #444;
+        }
+
+        /* Checkbox labels inline */
+        fieldset label {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 18px;
+            font-weight: normal;
+            color: #555;
+        }
+
+        fieldset input[type="checkbox"] {
+            margin-right: 6px;
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Button style */
+        button.calculate-btn {
+            display: block;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            font-size: 1.1rem;
+            padding: 14px 0;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background-color 0.25s ease;
+        }
+
+        button.calculate-btn:hover,
+        button.calculate-btn:focus {
+            background-color: #0056b3;
+            outline: none;
+        }
+
+        /* Result styling */
+        #result {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #e9f4ff;
+            border-radius: 7px;
+            padding: 20px 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0056b3;
+            box-shadow: 0 2px 10px rgb(0 86 179 / 0.15);
+            display: none;
+        }
+
+        #result span {
+            font-size: 2rem;
+            color: #003d80;
+        }
+
+        #result em {
+            font-weight: 400;
+            color: #333;
+            display: block;
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background: #121212;
+            color: #ddd;
+        }
+
+        body.dark-mode form#carbonForm {
+            background: #1e1e1e;
+            box-shadow: 0 6px 15px rgb(255 255 255 / 0.1);
+        }
+
+        body.dark-mode label,
+        body.dark-mode legend {
+            color: #ccc;
+        }
+
+        body.dark-mode select {
+            background: #2c2c2c;
+            color: #ddd;
+            border-color: #555;
+        }
+
+        body.dark-mode select:focus {
+            border-color: #66aaff;
+        }
+
+        body.dark-mode fieldset {
+            background: #222;
+            border-color: #444;
+        }
+
+        body.dark-mode fieldset label {
+            color: #bbb;
+        }
+
+        body.dark-mode button.calculate-btn {
+            background-color: #3399ff;
+        }
+
+        body.dark-mode button.calculate-btn:hover,
+        body.dark-mode button.calculate-btn:focus {
+            background-color: #0fb536;
+        }
+
+        body.dark-mode #result {
+            background: #0f2a4d;
+            color: #99ccff;
+            box-shadow: 0 2px 10px rgb(153 204 255 / 0.3);
+        }
+
+        body.dark-mode #result span {
+            color: #cce5ff;
+        }
+
+        body.dark-mode #result em {
+            color: #bbb;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+
+            form#carbonForm,
+            #result {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+
+            button.calculate-btn {
+                font-size: 1rem;
+                padding: 12px 0;
+            }
+        }
+    </style>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Carvyn</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 1rem;
+                background: #f0f4f8;
+                color: #222;
+                transition: background 0.3s, color 0.3s;
+            }
+
+            .dark-mode {
+                background: #121212;
+                color: #eee;
+            }
+
+            h1 {
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+
+
+            form {
+                max-width: 600px;
+                margin: 0 auto 2rem auto;
+                background: white;
+                padding: 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 0 10px #ccc;
+            }
+
+            .dark-mode form {
+                background: #1e1e1e;
+                box-shadow: 0 0 10px #444;
+            }
+
+            label,
+            legend {
+                font-weight: bold;
+            }
+
+            label {
+                display: block;
+                margin-top: 1rem;
+            }
+
+            select,
+            input[type="number"] {
+                margin-top: 0.25rem;
+                width: 100%;
+                padding: 0.5rem;
+                font-size: 1rem;
+                border-radius: 4px;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
+
+            fieldset {
+                margin-top: 1rem;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 0.75rem;
+            }
+
+            .dark-mode fieldset {
+                border-color: #555;
+            }
+
+            fieldset label {
+                display: inline-block;
+                margin-right: 1rem;
+                font-weight: normal;
+                margin-top: 0.5rem;
+                cursor: pointer;
+            }
+
+            .calculate-btn {
+                margin-top: 2rem;
+                padding: 0.75rem;
+                width: 100%;
+                font-size: 1.1rem;
+                background: #4caf50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+            .calculate-btn:hover,
+            .calculate-btn:focus {
+                background: #15871a;
+                outline: none;
+            }
+
+            #result {
+                max-width: 600px;
+                margin: 0 auto;
+                background: #dff0d8;
+                border-radius: 8px;
+                padding: 1rem;
+                font-size: 1.2rem;
+                display: none;
+                line-height: 1.4;
+                box-sizing: border-box;
+            }
+
+            .dark-mode #result {
+                background: #274727;
+                color: #d0f0c0;
+            }
+
+            #result span {
+                font-size: 1.5rem;
+                color: #4caf50;
+                font-weight: bold;
+            }
+
+            /* About Us Section - Light Mode */
+            #aboutUs {
+                background-color: #eef2f3;
+                padding: 60px 30px;
+                text-align: center;
+                color: #1d5524;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            #aboutUs h1 {
+                font-size: 2.8rem;
+                font-weight: bold;
+                color: #166534;
+                margin-bottom: 20px;
+                text-shadow: 1px 1px 0 #c0f0c8;
+            }
+
+            #aboutUs h2 {
+                font-size: 1.8rem;
+                color: #256029;
+                margin-bottom: 20px;
+                font-weight: 600;
+            }
+
+            #aboutUs h3 {
+                font-size: 1.1rem;
+                color: #234e2e;
+                line-height: 1.8;
+                max-width: 900px;
+                margin: auto;
+                background: rgba(255, 255, 255, 0.75);
+                padding: 20px;
+                border-radius: 16px;
+                box-shadow: 0 4px 12px rgba(22, 101, 52, 0.15);
+            }
+
+            #aboutUs strong {
+                color: #14532d;
+                font-weight: 700;
+                font-size: 1.15rem;
+            }
+
+
+            /* Responsive */
+            @media screen and (max-width: 768px) {
+                #aboutUs h1 {
+                    font-size: 2.2rem;
+                }
+
+                #aboutUs h2 {
+                    font-size: 1.4rem;
+                }
+
+                #aboutUs h3 {
+                    font-size: 1rem;
+                    padding: 15px;
+                }
+            }
+
+            /* 🔥 DARK MODE STYLES 🔥 */
+            body.dark #aboutUs {
+                background-color: #0f0f0f;
+                color: #bbf7d0;
+            }
+
+            body.dark #aboutUs h1 {
+                color: #86efac;
+                text-shadow: 1px 1px 0 #052e16;
+            }
+
+            body.dark #aboutUs h2 {
+                color: #4ade80;
+            }
+
+            body.dark #aboutUs h3 {
+                background: rgba(255, 255, 255, 0.05);
+                color: #d1fae5;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            }
+
+            body.dark #aboutUs strong {
+                color: #22c55e;
+            }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e6f4ea;
+            color: #2e4d2c;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #388e3c;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        nav a {
+            margin-left: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .title-section {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .title-section h2 {
+            color: #1f3d1f;
+            margin: 10px 0 0;
+        }
+
+        .title-section p {
+            color: #2e4d2c;
+        }
+
+        .awareness-section figure {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 30px auto;
+            width: 90%;
+            max-width: 1000px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 128, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .awareness-section figure:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .awareness-section img {
+            flex: 1 1 50%;
+            width: 100%;
+            height: 234px;
+            object-fit: cover;
+            border: none;
+            display: block;
+        }
+
+        .awareness-section figcaption {
+            flex: 1 1 50%;
+            padding: 20px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .awareness-section figcaption h2 {
+            color: #2f6e2f;
+            margin-top: 0;
+        }
+
+        .awareness-section a {
+            color: #207a43;
+            text-decoration: none;
+        }
+
+        .awareness-section a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .awareness-section figure {
+                flex-direction: column;
+            }
+
+            .awareness-section figcaption,
+            .awareness-section img {
+                flex: 1 1 100%;
+            }
+        }
+          body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2fff6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .fact-box {
+      max-width: 600px;
+      margin: 60px auto;
+      background-color: #e6fff0;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .fact-box h2 {
+      font-size: 24px;
+      color: #1c4532;
+      margin-bottom: 20px;
+    }
+
+    .fact {
+      font-size: 18px;
+      color: #2f4858;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      background-color: #2f855a;
+      color: white;
+      padding: 10px 20px;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #276749;
+    }
+        </style>
+    </head>
+
+    <body>
+        <h1>Carvyn📱</h1>
+        <h3><i>"Carve Your Carbon Footprint"</i></h3>
+
+
+
+        <form id="carbonForm" aria-label="Carbon footprint input form">
+            <!-- Housing -->
+            <label for="housing">Type of Housing:</label>
+            <select name="housing" id="housing" required>
+                <option value="">Select housing type</option>
+                <option value="detached">Detached house</option>
+                <option value="apartment">Apartment/Flat</option>
+                <option value="other">Other</option>
+            </select>
+
+            <!-- Heating energy -->
+            <label for="heatingEnergy">Heating energy source:</label>
+            <select name="heatingEnergy" id="heatingEnergy" required>
+                <option value="">Select energy source</option>
+                <option value="naturalGas">Natural Gas</option>
+                <option value="electricity">Electricity</option>
+                <option value="none">None</option>
+            </select>
+
+            <!-- Renewable energy -->
+            <label for="renewableEnergy">Do you use renewable energy?</label>
+            <select name="renewableEnergy" id="renewableEnergy" required>
+                <option value="">Select yes or no</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <!-- Heating hours -->
+            <label for="heatingHours">Hours of heating or AC use per day:</label>
+            <select name="heatingHours" id="heatingHours" required>
+                <option value="">Select hours</option>
+                <option value="0">0</option>
+                <option value="1-3">1-3</option>
+                <option value="4+">4+</option>
+            </select>
+
+            <!-- Transport modes -->
+            <fieldset>
+                <legend>Transport modes you use (check all that apply):</legend>
+                <label><input type="checkbox" name="transport" value="car" /> Car</label>
+                <label><input type="checkbox" name="transport" value="publicTransport" /> Public Transport</label>
+                <label><input type="checkbox" name="transport" value="bikeWalk" /> Bike / Walk</label>
+            </fieldset>
+
+            <!-- Car fuel -->
+            <label for="carFuel">If you use a car, what fuel type?</label>
+            <select name="carFuel" id="carFuel">
+                <option value="">Select fuel type</option>
+                <option value="petrolDiesel">Petrol/Diesel</option>
+                <option value="electricHybrid">Electric/Hybrid</option>
+                <option value="none">No car</option>
+            </select>
+
+            <!-- KM driven -->
+            <label for="kmDriven">Approximate km driven per week by car:</label>
+            <select name="kmDriven" id="kmDriven">
+                <option value="">Select km</option>
+                <option value="0">0</option>
+                <option value="1-50">1-50</option>
+                <option value="50+">50+</option>
+            </select>
+
+            <!-- Flights -->
+            <label for="flights">Number of flights per year:</label>
+            <select name="flights" id="flights" required>
+                <option value="">Select flights</option>
+                <option value="0">0</option>
+                <option value="1-2">1-2</option>
+                <option value="3+">3+</option>
+            </select>
+
+            <!-- Diet -->
+            <label for="diet">Diet type:</label>
+            <select name="diet" id="diet" required>
+                <option value="">Select diet type</option>
+                <option value="omnivore">Omnivore</option>
+                <option value="vegetarianVegan">Vegetarian/Vegan</option>
+            </select>
+
+            <!-- Meat frequency -->
+            <label for="meatFrequency">How often do you eat meat?</label>
+            <select name="meatFrequency" id="meatFrequency" required>
+                <option value="">Select frequency</option>
+                <option value="0">0 times per week</option>
+                <option value="1-2">1-2 times per week</option>
+                <option value="3+">3 or more times per week</option>
+            </select>
+
+            <!-- Clothes buying frequency -->
+            <label for="clothesFreq">How often do you buy clothes?</label>
+            <select name="clothesFreq" id="clothesFreq" required>
+                <option value="">Select frequency</option>
+                <option value="rarely">Rarely</option>
+                <option value="fewTimes">Few times per year</option>
+                <option value="monthly">Monthly</option>
+            </select>
+
+            <!-- Recycling -->
+            <label for="recycleFreq">How often do you recycle?</label>
+            <select name="recycleFreq" id="recycleFreq" required>
+                <option value="">Select frequency</option>
+                <option value="never">Never</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="always">Always</option>
+            </select>
+
+            <!-- Compost -->
+            <label for="compost">Do you compost your waste?</label>
+            <select name="compost" id="compost" required>
+                <option value="">Select yes or no</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <!-- Energy-saving bulbs -->
+            <label for="energyBulbs">Do you use energy-saving bulbs?</label>
+            <select name="energyBulbs" id="energyBulbs" required>
+                <option value="">Select yes or no</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <!-- Appliances off -->
+            <label for="appliancesOff">Do you turn off appliances when not in use?</label>
+            <select name="appliancesOff" id="appliancesOff" required>
+                <option value="">Select frequency</option>
+                <option value="always">Always</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="never">Never</option>
+            </select>
+
+            <button type="submit" class="calculate-btn">Calculate Carbon Footprint</button>
+        </form>
+
+        <div id="result" aria-live="polite" role="region"></div>
+        <div class="avatar-container">
+            <img id="ecoAvatar" src="Carbon Clone.png" alt="Carvyn" class="avatar" />
+        </div>
+        <script>
+
+            const form = document.getElementById('carbonForm');
+            const resultDiv = document.getElementById('result');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Extract values
+                const housing = form.housing.value;
+                const heatingEnergy = form.heatingEnergy.value;
+                const renewableEnergy = form.renewableEnergy.value;
+                const heatingHours = form.heatingHours.value;
+                const transportSelected = [...document.querySelectorAll('input[name="transport"]:checked')].map(c => c.value);
+                const carFuel = form.carFuel.value;
+                const kmDriven = form.kmDriven.value;
+                const flights = form.flights.value;
+                const diet = form.diet.value;
+                const meatFrequency = form.meatFrequency.value;
+                const clothesFreq = form.clothesFreq.value;
+                const recycleFreq = form.recycleFreq.value;
+                const compost = form.compost.value;
+                const energyBulbs = form.energyBulbs.value;
+                const appliancesOff = form.appliancesOff.value;
+
+                // Housing footprint (weekly)
+                let housingFootprint = 0;
+                if (housing === 'detached') housingFootprint = 5000 / 52;
+                else if (housing === 'apartment') housingFootprint = 2500 / 52;
+                else housingFootprint = 3500 / 52;
+
+                // Heating energy footprint per week
+                let heatingFootprint = 0;
+                if (heatingEnergy === 'naturalGas') heatingFootprint = 150;
+                else if (heatingEnergy === 'electricity') heatingFootprint = 100;
+                else heatingFootprint = 0;
+
+                // Modify heating by hours of use
+                if (heatingHours === '4+') heatingFootprint *= 1;
+                else if (heatingHours === '1-3') heatingFootprint *= 0.5;
+                else heatingFootprint = 0;
+
+                // Apply renewable energy reduction (30% reduction on heating + housing)
+                if (renewableEnergy === 'yes') {
+                    const combined = housingFootprint + heatingFootprint;
+                    const reduced = combined * 0.7;
+                    const reduction = (housingFootprint + heatingFootprint) - reduced;
+                    const ratioHousing = housingFootprint / (housingFootprint + heatingFootprint);
+                    housingFootprint -= reduction * ratioHousing;
+                    heatingFootprint -= reduction * (1 - ratioHousing);
+                }
+
+                // Transport footprint per week
+                let transportFootprint = 0;
+
+                if (transportSelected.includes('car')) {
+                    let perKmEmission = 0;
+                    if (carFuel === 'petrolDiesel') perKmEmission = 0.2;
+                    else if (carFuel === 'electricHybrid') perKmEmission = 0.08;
+                    else perKmEmission = 0;
+
+                    let km = 0;
+                    if (kmDriven === '50+') km = 50;
+                    else if (kmDriven === '1-50') km = 25; // average
+                    else km = 0;
+
+                    transportFootprint += perKmEmission * km;
+                }
+
+                if (transportSelected.includes('publicTransport')) {
+                    transportFootprint += 5;
+                }
+
+                if (transportSelected.includes('bikeWalk')) {
+                    transportFootprint += 0;
+                }
+
+                // Flights footprint weekly
+                let flightsCount = 0;
+                if (flights === '3+') flightsCount = 3;
+                else if (flights === '1-2') flightsCount = 1.5;
+                else flightsCount = 0;
+
+                const flightFootprint = (flightsCount * 250) / 52;
+
+                // Diet footprint weekly
+                let dietFootprint = 0;
+                if (diet === 'omnivore') dietFootprint = 3000 / 52;
+                else dietFootprint = 1500 / 52;
+
+                // Meat frequency modifier
+                if (meatFrequency === '3+') dietFootprint *= 1.2;
+                else if (meatFrequency === '1-2') dietFootprint *= 1.1;
+                else dietFootprint *= 1.0;
+
+                // Clothes footprint weekly
+                let clothesFootprint = 0;
+                if (clothesFreq === 'monthly') clothesFootprint = 1200 / 52;
+                else if (clothesFreq === 'fewTimes') clothesFootprint = 400 / 52;
+                else clothesFootprint = 100 / 52;
+
+                // Recycling footprint weekly
+                let recycleFootprint = 0;
+                if (recycleFreq === 'never') recycleFootprint = 10;
+                else if (recycleFreq === 'sometimes') recycleFootprint = 5;
+                else recycleFootprint = 0;
+
+                // Compost reduces waste footprint by 3 kg/week if yes
+                let compostReduction = 0;
+                if (compost === 'yes') compostReduction = -3;
+
+                // Energy-saving bulbs reduce electricity footprint by 2 kg/week if yes
+                let bulbReduction = 0;
+                if (energyBulbs === 'yes') bulbReduction = -2;
+
+                // Appliances off reduces electricity footprint
+                let applianceReduction = 0;
+                if (appliancesOff === 'always') applianceReduction = -2;
+                else if (appliancesOff === 'sometimes') applianceReduction = -1;
+
+                // Sum all footprints
+                let totalFootprint = housingFootprint + heatingFootprint + transportFootprint + flightFootprint + dietFootprint + clothesFootprint + recycleFootprint + compostReduction + bulbReduction + applianceReduction;
+
+                // Clamp to zero minimum
+                if (totalFootprint < 0) totalFootprint = 0;
+
+                // Display result rounded
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '<strong>Your estimated weekly carbon footprint is:</strong><br><span>' + totalFootprint.toFixed(1) + ' kg CO<sub>2</sub>e</span>';
+
+                // Interpretation message
+                if (totalFootprint < 100) {
+                    resultDiv.innerHTML += '<br><em>Great job! Your footprint is low compared to average.</em>';
+                } else if (totalFootprint < 200) {
+                    resultDiv.innerHTML += '<br><em>Your footprint is moderate. Consider adopting more green habits.</em>';
+                } else {
+                    resultDiv.innerHTML += '<br><em>Your footprint is high. Consider reducing travel, energy use, and consumption.</em>';
+                }
+
+                // Scroll to result and affect its parent
+                resultDiv.scrollIntoView({ behavior: 'smooth' });
+                // Avatar change logic based on totalFootprint
+                const avatarImg = document.getElementById('ecoAvatar');
+
+                if (totalFootprint < 100) {
+                    avatarImg.src = 'good.jpg'; // Green Hero avatar
+                    avatarImg.alt = 'Green Hero Avatar';
+                } else if (totalFootprint < 200) {
+                    avatarImg.src = 'medium.jpg'; // Neutral/Eco-aware
+                    avatarImg.alt = 'Eco-aware Avatar';
+                } else {
+                    avatarImg.src = 'Bad.jpg'; // Carbon Monster
+                    avatarImg.alt = 'Carbon Monster Avatar';
+                }
+            });
+        </script>
+
+        <section id="aboutUs">
+            <h1>About Us</h1>
+            <h2>Driven by Change: Meet the Teenage Reformers Behind CarboNeutralizer</h2>
+            <h3>
+                <strong>WHO ARE WE?</strong><br><br>
+                We are Meenal Gupta & Eshvi Singh, from Team CO<sub>2</sub>nsistent Reformers — two teenagers driven by
+                purpose and passion to fight one of the biggest
+                challenges of our time: carbon emissions.
+                <br><br>
+                Our awareness began with what we saw around us — blackened hills scarred by forest fires, rising
+                temperatures, and a planet in distress. Curious and concerned, we dove deep into research and uncovered
+                shocking facts about how everyday choices contribute to a larger climate crisis.
+                <br><br>
+                What we found didn’t just open our eyes — it changed our mindset.
+                <br><br>
+                That’s why we’re here: to simplify complex climate facts, spread awareness about carbon footprints, and
+                inspire action through meaningful content. From sharing daily facts to building this website, we’re
+                committed to making carbon consciousness a part of everyday life.
+                <br><br>
+                We may be young, but our goal is clear —<br>
+                <strong>A cleaner, greener, carbon-conscious world.</strong>
+            </h3>
+
+            
+        </section>
+         <section class="title-section" id="awareness">
+        <h1>Awareness Campaign</h1>
+        <p>Spreading sustainability, one act at a time 🌱</p>
+    </section>
+
+    <section class="awareness-section">
+        <figure>
+            <img src="plant.png" alt="plant" />
+            <figcaption>
+                <h2>🌱 Plant Today, Breathe Tomorrow 🌿</h2>
+                In a world racing against climate change, every small act counts.
+                Today, we planted more than just a sapling — we planted hope, responsibility, and a greener future. 🌍✨<br>
+                #GreenFuture #PlantMoreTrees #TeenageReformers
+            </figcaption>
+        </figure>
+
+        <figure>
+            <img src="awareness.png" alt="campaign" />
+            <figcaption>
+                <h2> 🗣 Conversations That Matter 🌏</h2>
+                Change begins with awareness — and awareness begins with a conversation. <br>
+                <a href="https://www.instagram.com/reel/DJ2_M2YyGpz/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                    target="_blank">Watch full video</a>
+                <br>#CarbonAwareness #CommunityAction #EcoDialogues
+            </figcaption>
+        </figure>
+
+        <figure>
+            <img src="aurnhihoga.png" alt="noo2" />
+            <figcaption>
+                <h2>🪙💨 Weird? Maybe. But it works.</h2>
+                This overflowing jar isn’t just about coins — it’s about carbon, and how our planet is running out of space
+                to hold it. 🌍<br>
+                Until the Earth finally says: "Ab aur nhi ho payega!"<br>
+                #OverflowingCarbon #VisualActivism #AbAurNhi
+            </figcaption>
+        </figure>
+
+        <figure>
+            <img src="never gonna.png" alt="nvm" />
+            <figcaption>
+                <h2> 🎵 Using trends to spark truths.</h2>
+                "Never gonna get it" — the clean air, the blue skies, the endless beauty of our 🌍.<br>
+                This isn't just a trend. It's a movement.<br>
+                #ClimateInStyle #NeverGonnaGetIt #EarthReelTalk
+            </figcaption>
+        </figure>
+
+        <figure>
+            <img src="graph.png" alt="ss" />
+            <figcaption>
+                <h2>📊 Making It Visual. Making It Clear.</h2>
+                We use easy-to-understand graphs to show India’s rising CO₂ levels.
+                Visual tools help us connect and act — no matter our age or background. 🌍
+            </figcaption>
+        </figure>
+    </section>
+    <section id="facts">
+ <!-- Fun Fact Box -->
+  <div class="fact-box">
+    <h2>💡 Did You Know?</h2>
+    <div class="fact" id="factText">Loading...</div>
+    <button class="btn" onclick="showNextFact()">Show Another Fact</button>
+  </div>
+
+  <script>
+    const facts = [
+      "🌳 One tree absorbs ~22kg CO₂ per year.",
+      "🚗 Driving 1 km emits ~0.2 kg CO₂ in a petrol car.",
+      "💡 Vampire devices can emit 30 kg CO₂ yearly per home.",
+      "📱 Streaming 1 hour of HD video = ~0.2 kg CO₂.",
+      "✈️ One round-trip flight from NY to London = 986 kg CO₂.",
+      "🍔 Producing one beef burger = ~3 kg CO₂.",
+      "❌ Leaving your computer on overnight wastes ~1.5 kg CO₂/month.",
+      "🌍 CO₂ levels are higher now than at any point in the last 800,000 years.",
+      "🔥 Every second, the world emits ~1,000 tonnes of CO₂.",
+      "🧺 1 plastic bottle = ~100g CO₂ to produce.",
+      "⚡ LED bulbs use 80% less energy than incandescents.",
+      "🧼 One cotton shirt = 2.1 kg CO₂.",
+      "🚧 Cement industry = ~8% of global CO₂ emissions.",
+      "🌞 Solar energy produces 20x less CO₂ than coal.",
+      "🌿 Bamboo grows fast and captures more CO₂ than regular trees.",
+      "🛫 One cruise ship emits as much CO₂ as 12,000 cars.",
+      "🍽 Food waste causes ~10% of total global emissions.",
+      "🏠 Heating and cooling = 50% of a home's energy use.",
+      "🏜️ Tourism contributes ~8% to global CO₂ emissions.",
+      "⛅ Weather extremes are intensified by rising CO₂ levels.",
+      "🤔 Just one hour of video conferencing = ~0.15 kg CO₂.",
+      "🚉 Trains emit 80% less CO₂ than planes per km traveled.",
+      "♻️ Recycling aluminum saves 95% of CO₂ vs new production.",
+      "🛋 Using fans instead of AC reduces CO₂ by up to 90%.",
+      "🚗 Carpooling can cut your transport CO₂ by half.",
+      "🍽 A vegetarian diet can lower emissions by 1,500 kg/year.",
+      "🚛 Trucks cause ~20% of global transport emissions.",
+      "🌅 Every sunrise brings ~100 million tonnes of fresh CO₂.",
+      "⛽ Fossil fuels are responsible for ~75% of all emissions.",
+      "🧻 A 5-minute shower = ~0.4 kg CO₂ if heated with electricity.",
+      "🚧 Steel production emits 2.6 billion tonnes of CO₂ per year.",
+      "🌎 If CO₂ were visible, we'd live in a grey fog.",
+      "🛋 Turning off your Wi-Fi at night saves 30 kg CO₂ yearly.",
+      "🌮 Cooking with gas emits less CO₂ than electric stoves (depending on grid).",
+      "🌟 The cleanest kilowatt-hour is the one you never use.",
+      "🚗 EVs reduce emissions by 40-70% over their lifetime.",
+      "📆 2023 had record-high CO₂ levels — 421 ppm.",
+      "🚒 Air freight emits ~50x more CO₂ per ton than sea shipping.",
+      "🌳 Forests absorb ~2.6 billion tonnes of CO₂ annually.",
+      "🌜 Nighttime lights from cities = huge energy use = high CO₂.",
+      "📢 Awareness is the first step to cutting emissions.",
+      "❄️ Melting Arctic = more dark ocean = more CO₂ absorption loss.",
+      "🌿 Rewilding land boosts natural carbon capture.",
+      "⚡ Smart plugs can cut vampire CO₂ emissions.",
+      "🫳 Using a bicycle is 30x more efficient than a car.",
+      "🌈 Renewable energy jobs are growing 3x faster than fossil ones.",
+      "💸 Energy-efficient buildings save money and emissions.",
+      "🏡 Green roofs help reduce urban CO₂ heat effects.",
+      "🚐 Public transport cuts emissions and traffic.",
+      "🧳 Digital carbon footprints are rising rapidly.",
+      "🔁 Reusing items prevents new CO₂ emissions.",
+      "🌞 Solar panels offset their CO₂ cost in ~1-2 years.",
+      "📱 Charging phones overnight wastes ~0.5 kg CO₂/year.",
+      "✅ Sharing is a form of climate action!"
+    ];
+
+    let currentFactIndex = 0;
+
+    function showNextFact() {
+      currentFactIndex = (currentFactIndex + 1) % facts.length;
+      document.getElementById('factText').innerText = facts[currentFactIndex];
+    }
+
+    // Initialize
+    window.onload = () => {
+      currentFactIndex = Math.floor(Math.random() * facts.length);
+      document.getElementById('factText').innerText = facts[currentFactIndex];
+    };
+  </script>
+  </section>
+    </body>
+    </html>
